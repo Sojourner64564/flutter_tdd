@@ -9,3 +9,7 @@ abstract class Failure extends Equatable{
   @override
   get props => properties;
 }
+
+class ServerFailure extends Failure {}
+
+class CashFailure extends Failure {}
