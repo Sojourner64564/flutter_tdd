@@ -12,4 +12,4 @@ abstract class Failure extends Equatable{
 
 class ServerFailure extends Failure {}
 
-class CashFailure extends Failure {}
+class CacheFailure extends Failure {}
