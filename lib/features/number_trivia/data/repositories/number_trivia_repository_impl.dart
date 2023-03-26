@@ -12,10 +12,10 @@ import 'package:flutter_tdd/features/number_trivia/domain/repositories/number_tr
 typedef Future<NumberTrivia> _ConcreteOrRandomChooser();
 
 class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
-  NumberTriviaRepositoryImpl(
-      @required this.remoteDataSource,
-      @required this.localDataSource,
-      @required this.networkInfo);
+  NumberTriviaRepositoryImpl({
+      required this.remoteDataSource,
+      required this.localDataSource,
+      required this.networkInfo});
 
   final NumberTriviaRemoteDataSource remoteDataSource;
   final NumberTriviaLocalDataSource localDataSource;

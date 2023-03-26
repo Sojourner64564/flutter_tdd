@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tdd/injection_container.dart' as di;
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await di.init();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
