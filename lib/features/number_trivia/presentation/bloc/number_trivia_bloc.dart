@@ -1,7 +1,6 @@
 //import 'dart: async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_tdd/core/error/failures.dart';
 import 'package:flutter_tdd/core/usecases/usecases.dart';
 import 'package:flutter_tdd/core/util/input_converter.dart';
@@ -17,11 +16,11 @@ const String INVALID_INPUT_FAILURE_MESSAGE =
 
 class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   NumberTriviaBloc(
-  super.initialState,{
-   required GetConcreteNumberTrivia concrete,
-  required GetRandomNumberTrivia random,
-  required this.inputConverter,
-})   : assert(concrete != null),
+    super.initialState, {
+    required GetConcreteNumberTrivia concrete,
+    required GetRandomNumberTrivia random,
+    required this.inputConverter,
+  })  : assert(concrete != null),
         assert(random != null),
         assert(inputConverter != null),
         getConcreteNumberTrivia = concrete,
@@ -53,22 +52,22 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
           yield* _eitherLoadedOrErrorState(failureOrTrivia);
         },
       );
-    } else if(event is GetConcreteNumberTrivia){
+    } else if (event is GetConcreteNumberTrivia) {
       yield Loading();
-      final failureOrTrivia =
-      await getRandomNumberTrivia(NoParams());
+      final failureOrTrivia = await getRandomNumberTrivia(NoParams());
       yield* _eitherLoadedOrErrorState(failureOrTrivia);
     }
   }
 
-  Stream<NumberTriviaState> _eitherLoadedOrErrorState(Either<Failure, NumberTrivia> failureOrTrivia) async* {
+  Stream<NumberTriviaState> _eitherLoadedOrErrorState(
+      Either<Failure, NumberTrivia> failureOrTrivia) async* {
     yield failureOrTrivia.fold(
       (failure) => Error(_mapFailureToMessage(failure)),
       (trivia) => Loaded(trivia),
     );
   }
 
-  String _mapFailureToMessage(Failure failure){
+  String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:
         return SERVER_FAILURE_MESSAGE;

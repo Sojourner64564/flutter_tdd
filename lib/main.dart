@@ -1,34 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tdd/injection_container.dart' as di;
 
+import 'features/number_trivia/presentation/pages/number_trivia_page.dart';
+
 void main() async {
   await di.init();
   runApp(MyApp());
 }
-
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home:  MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-@override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
+    return MaterialApp(
+      title: 'Number Trivia',
+      theme: ThemeData(
+        primaryColor: Colors.green.shade800,
+       // accentColor: Colors.green.shade600,
       ),
-      body: const Center(
-
-      ),
+      home: NumberTriviaPage(),
     );
   }
 }
