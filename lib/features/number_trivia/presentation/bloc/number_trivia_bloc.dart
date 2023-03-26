@@ -5,6 +5,11 @@ import 'package:flutter_tdd/features/number_trivia/domain/usecases/get_concrete_
 import 'package:flutter_tdd/features/number_trivia/domain/usecases/get_random_number_trivia.dart';
 import './bloc.dart';
 
+const String SERVER_FAILURE_MESSAGE = 'Server Failure';
+const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
+const String INVALID_INPUT_FAILURE_MESSAGE =
+    'Invalid Input - number must be a positive integer or zero';
+
 class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   NumberTriviaBloc(
     super.initialState,
@@ -27,5 +32,17 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   @override
   Stream<NumberTriviaState> mapEventToState(
     NumberTriviaEvent event,
-  ) async* {}
+  ) async* {
+    if (event is GetTriviaForConcreteNumber) {
+      final inputEither =
+          inputConverter.stringToUnsignedInteger(event.numberString);
+
+      yield* inputEither.fold(
+        (failure) async* {
+          yield Error(INVALID_INPUT_FAILURE_MESSAGE);
+        },
+        (integer) => UnimplementedError(),
+      );
+    }
+  }
 }
