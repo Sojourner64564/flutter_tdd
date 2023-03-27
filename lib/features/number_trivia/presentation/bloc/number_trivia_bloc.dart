@@ -16,7 +16,7 @@ const String INVALID_INPUT_FAILURE_MESSAGE =
 
 class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   NumberTriviaBloc(
-    super.initialState, {
+     {
     required GetConcreteNumberTrivia concrete,
     required GetRandomNumberTrivia random,
     required this.inputConverter,
@@ -24,7 +24,7 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
         assert(random != null),
         assert(inputConverter != null),
         getConcreteNumberTrivia = concrete,
-        getRandomNumberTrivia = random;
+        getRandomNumberTrivia = random, super(Empty());
 
   final GetConcreteNumberTrivia getConcreteNumberTrivia;
   final GetRandomNumberTrivia getRandomNumberTrivia;

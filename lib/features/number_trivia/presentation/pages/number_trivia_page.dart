@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_tdd/features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
+import 'package:flutter_tdd/features/number_trivia/presentation/bloc/bloc.dart';
 
 import '../../../../injection_container.dart';
+import '../../domain/entities/number_trivia.dart';
 
 class NumberTriviaPage extends StatelessWidget {
   @override
@@ -11,14 +12,17 @@ class NumberTriviaPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Number Trivia'),
       ),
-      body: buildBody(),
+      body: buildBody(context),
     );
   }
 }
 
 BlocProvider<NumberTriviaBloc> buildBody(BuildContext context) {
   return BlocProvider(
-    builder: (_) => sl<NumberTriviaBloc>(),
+    // builder: (_) => sl<NumberTriviaBloc>(),
+    create: (BuildContext context) {
+      return sl<NumberTriviaBloc>();
+    },
     child: Center(
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -26,12 +30,20 @@ BlocProvider<NumberTriviaBloc> buildBody(BuildContext context) {
           children: <Widget>[
             SizedBox(height: 10),
             // Top half
-            Container(
-              // Third of the size of the screen
-              height: MediaQuery.of(context).size.height / 3,
-              // Message Text widgets / CircularLoadingIndicator
-              child: Placeholder(),
-            ),
+            BlocBuilder<NumberTriviaBloc, NumberTriviaState>(
+                builder: (context, state) {
+              if (state is Empty) {
+                return MessageDispley(
+                  message: "Start seaching",
+                );
+              } else if (state is Loading) {
+
+              } else if (state is Loaded) {
+              } else if (state is Error) {
+                return MessageDispley(message: state.message);
+              }
+            }),
+
             SizedBox(height: 20),
             // Bottom half
             Column(
@@ -59,4 +71,44 @@ BlocProvider<NumberTriviaBloc> buildBody(BuildContext context) {
       ),
     ),
   );
+}
+
+class MessageDispley extends StatelessWidget {
+  const MessageDispley({required this.message});
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height / 3,
+      child: Text('$message'),
+    );
+  }
+}
+
+
+class LoadingWidget extends StatelessWidget {
+  const LoadingWidget({required this.message});
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height / 3,
+      child: Text('$message'),
+    );
+  }
+}
+
+class TriviaDispley extends StatelessWidget {
+  const TriviaDispley({required this.numberTrivia});
+  final NumberTrivia numberTrivia;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height / 3,
+      child: Text('$numberTrivia'),
+    );
+  }
 }
