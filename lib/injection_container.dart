@@ -1,4 +1,4 @@
-import 'package:data_connection_checker/data_connection_checker.dart';
+//import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter_tdd/core/network/network_info.dart';
 import 'package:flutter_tdd/core/util/input_converter.dart';
 import 'package:flutter_tdd/features/number_trivia/data/datasources/number_trivia_remote_data_source.dart';
@@ -43,13 +43,13 @@ Future<void> init() async {
 
   //Core
   sl.registerLazySingleton(() => InputConverter());
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+ // sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
   //External
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton(() => http.Client());
-  sl.registerLazySingleton(() => DataConnectionChecker());
+ // sl.registerLazySingleton(() => DataConnectionChecker());
 }
 
 void initFeatures() {}
