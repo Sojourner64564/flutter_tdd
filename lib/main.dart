@@ -6,6 +6,7 @@ import 'features/number_trivia/presentation/pages/number_trivia_page.dart';
 void main() async {
   await di.init();
   runApp(MyApp());
+
 }
 class MyApp extends StatelessWidget {
   @override
