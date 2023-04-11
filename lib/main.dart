@@ -5,6 +5,7 @@ import 'features/number_trivia/presentation/pages/number_trivia_page.dart';
 
 void main() async {
   await di.init();
+  await WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 
 }

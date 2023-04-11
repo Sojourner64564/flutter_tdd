@@ -52,4 +52,4 @@ Future<void> init() async {
  // sl.registerLazySingleton(() => DataConnectionChecker());
 }
 
-void initFeatures() {}
+//void initFeatures() {}

@@ -12,14 +12,15 @@ class NumberTriviaPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Number Trivia'),
       ),
-      body: SingleChildScrollView(child: Screen()),
+      body: SingleChildScrollView(child:
+      Screen(),
+      ),
     );
   }
 }
 
 class Screen extends StatelessWidget{
 
-  
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -65,46 +66,3 @@ class Screen extends StatelessWidget{
 
 
 }
-
-
-BlocProvider<NumberTriviaBloc> buildBody(BuildContext context) {
-  return BlocProvider(
-    // builder: (_) => sl<NumberTriviaBloc>(),
-    create: (BuildContext context) {
-      return sl<NumberTriviaBloc>();
-    },
-    child: Center(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 10),
-            // Top half
-            BlocBuilder<NumberTriviaBloc, NumberTriviaState>(
-              builder: (context, state) {
-                if (state is Empty) {
-                  return MessageDispley(
-                    message: "Start seaching",
-                  );
-                } else if (state is Loading) {
-                  return LoadingWidget(message: 'loaading');
-                } else if (state is Loaded) {
-                  return TriviaDisplay(numberTrivia: state.trivia);
-                } else if (state is Error) {
-                  return MessageDispley(message: state.message);
-                } else {
-                  return MessageDispley(message: "bruh");
-                }
-              },
-            ),
-
-            SizedBox(height: 20),
-            // Bottom half
-            TriviaControls()
-          ],
-        ),
-      ),
-    ),
-  );
-}
-

@@ -5,7 +5,7 @@ import '../../domain/entities/number_trivia.dart';
 
 @immutable
 abstract class NumberTriviaState extends Equatable {
-  NumberTriviaState([List props = const <dynamic>[]]);
+  NumberTriviaState(); //[List props = const <dynamic>[]]
 }
 
 class Empty extends NumberTriviaState{

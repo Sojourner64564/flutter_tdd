@@ -22,7 +22,7 @@ class NumberTriviaRemoteDataSourceImpl implements NumberTriviaRemoteDataSource{
 
 
   Future<NumberTriviaModel> _getTriviaFromUrl(String url) async {
-    final response = await client.get(Uri(scheme: url),  // тут было без юри
+    final response = await client.get(Uri.parse(url),  // тут было без юри
       headers: {'Content-Type': 'application/json'},
     );
     if(response.statusCode == 200){

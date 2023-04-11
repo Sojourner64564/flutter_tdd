@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class NumberTriviaEvent extends Equatable {
-  NumberTriviaEvent([List props = const <dynamic>[]]);
+  NumberTriviaEvent(); //[List props = const <dynamic>[]]
 }
 
 class GetTriviaForConcreteNumber extends NumberTriviaEvent{
