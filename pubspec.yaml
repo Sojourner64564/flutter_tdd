@@ -45,8 +45,9 @@ dependencies:
   http: ^0.13.5
   shared_preferences: ^2.0.18
   mockito: ^5.3.2
-  data_connection_checker: ^0.3.4
   bloc: ^8.1.1
+  flutter_secure_storage: ^8.0.0
+  internet_connection_checker: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:

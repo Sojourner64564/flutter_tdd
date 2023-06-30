@@ -23,7 +23,7 @@ class _TriviaControlsState extends State<TriviaControls> {
         // TextField
         TextField(
           controller: controller,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             border: OutlineInputBorder(),
             hintText: 'Input a number',
           ),
@@ -32,23 +32,23 @@ class _TriviaControlsState extends State<TriviaControls> {
             inputStr = value;
           },
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(
           children: <Widget>[
             Expanded(
               // Search concrete button
               child: ElevatedButton(
-                child: Text('Search'),
+                child: const Text('Search'),
                 onPressed: (){
                   dispatchConcrete(context, inputStr, controller);
                 },
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(
               // Random button
               child: ElevatedButton(
-                child: Text('Random'),
+                child: const Text('Random'),
                 onPressed: (){
                   dispatchRandom(context, controller);
                 },

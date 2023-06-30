@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_tdd/core/error/exceptions.dart';
 import 'package:flutter_tdd/core/error/failures.dart';
 import 'package:flutter_tdd/core/network/network_info.dart';
@@ -9,7 +8,7 @@ import 'package:flutter_tdd/features/number_trivia/data/models/number_nrivia_mod
 import 'package:flutter_tdd/features/number_trivia/domain/entities/number_trivia.dart';
 import 'package:flutter_tdd/features/number_trivia/domain/repositories/number_trivia_repository.dart';
 
-typedef Future<NumberTrivia> _ConcreteOrRandomChooser();
+typedef _ConcreteOrRandomChooser = Future<NumberTrivia> Function();
 
 class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   NumberTriviaRepositoryImpl({
@@ -23,10 +22,9 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
 
 
   @override
-Future<Either<Failure, NumberTrivia>> getConcreteNumberTrivia(int? number) async {
-
-    return await _getTrivia((){
-      return remoteDataSource.getConcreteNumberTrivia(number);
+  Future<Either<Failure, NumberTrivia>> getConcreteNumberTrivia(int number) async {
+    return await _getTrivia(() async{
+      return await remoteDataSource.getConcreteNumberTrivia(number);
     });
 
   }
@@ -38,8 +36,7 @@ Future<Either<Failure, NumberTrivia>> getRandomNumberTrivia() async {
     });
   }
 
-  Future<Either<Failure, NumberTrivia>> _getTrivia( _ConcreteOrRandomChooser getConcreteOrRandom) async {
-
+  Future<Either<Failure, NumberTrivia>> _getTrivia(Future<NumberTriviaModel> Function() getConcreteOrRandom) async {
     if (await networkInfo.isConnected) {
       try {
         final remoteTrivia = await getConcreteOrRandom();
