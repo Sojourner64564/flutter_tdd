@@ -20,7 +20,6 @@ class _TriviaControlsState extends State<TriviaControls> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        // TextField
         TextField(
           controller: controller,
           decoration: const InputDecoration(

@@ -8,18 +8,6 @@ import 'package:flutter_tdd/features/number_trivia/domain/usecases/get_concrete_
 import 'package:flutter_tdd/features/number_trivia/domain/usecases/get_random_number_trivia.dart';
 import './bloc.dart';
 
-
-/*
-  NumberTriviaBloc({
-    required GetConcreteNumberTrivia concrete,
-    required GetRandomNumberTrivia random,
-    required this.inputConverter,
-  })  : getConcreteNumberTrivia = concrete,
-        getRandomNumberTrivia = random, super(Empty()){
-    on<GetTriviaForConcreteNumber>(_onGetTriviaForConcreteNumber);
-    on<GetTriviaForRandomNumber>(_onGetTriviaForRandomNumber);
-  }
- */
 const String SERVER_FAILURE_MESSAGE = 'Server Failure';
 const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
 const String INVALID_INPUT_FAILURE_MESSAGE =
@@ -57,33 +45,8 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
      _eitherLoadedOrErrorState(failureOrTrivia);
   }
 
-/*
-//  @override
-  Stream<NumberTriviaState> mapEventToState(NumberTriviaEvent event) async* {
-    if (event is GetTriviaForConcreteNumber) {
-      final inputEither =
-          inputConverter.stringToUnsignedInteger(event.numberString);
 
-      yield* inputEither.fold(
-        (failure) async* {
-          yield Error(INVALID_INPUT_FAILURE_MESSAGE);
-        },
-        (integer) async* {
-          yield Loading();
-          final failureOrTrivia =
-              await getConcreteNumberTrivia(Params(number: integer));
-          yield* _eitherLoadedOrErrorState(failureOrTrivia);
-        },
-      );
-
-    } else if (event is GetTriviaForRandomNumber) {
-      yield Loading();
-      final failureOrTrivia = await getRandomNumberTrivia(NoParams());
-      yield* _eitherLoadedOrErrorState(failureOrTrivia);
-    }
-  }*/
-
-  void _eitherLoadedOrErrorState(Either<Failure, NumberTrivia> failureOrTrivia) { //was  Stream<NumberTriviaState>
+  void _eitherLoadedOrErrorState(Either<Failure, NumberTrivia> failureOrTrivia) {
     emit(failureOrTrivia.fold((failure) => Error(_mapFailureToMessage(failure)), (trivia) => Loaded(trivia),));
   }
 

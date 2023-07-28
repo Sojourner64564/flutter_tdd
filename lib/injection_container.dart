@@ -7,7 +7,6 @@ import 'package:flutter_tdd/features/number_trivia/domain/usecases/get_concrete_
 import 'package:flutter_tdd/features/number_trivia/presentation/bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'features/number_trivia/data/datasources/number_trivia_local_data_source.dart';
 import 'features/number_trivia/domain/repositories/number_trivia_repository.dart';
@@ -47,14 +46,11 @@ void init() {
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
   //External
-  //sl.registerLazySingletonAsync<SharedPreferences>(()=>SharedPreferences.getInstance());
 
   sl.registerLazySingleton(() => const FlutterSecureStorage());
   
-  //final sharedPreferences = await SharedPreferences.getInstance();
- // sl.registerLazySingleton(() => sharedPreferences);
+
   sl.registerLazySingleton(() => http.Client());
-  //sl.registerLazySingleton(() => DataConnectionChecker());
   sl.registerLazySingleton(() => InternetConnectionChecker());
 }
 
